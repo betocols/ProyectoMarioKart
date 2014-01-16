@@ -6,7 +6,7 @@ kart::kart(Ogre::SceneManager* sm){
   speed = 0.0;
   distance = 0.0;
   pos = 0.0;
-  zone = 0; //0-> x=130 z=0->200 || 1,2,3,7,8-> x=200 || 4-> x=2350->2900 ||  5-> x=30 ||  6-> x=30->200
+  zone = 0; //0-> x=130 z=0->200 || 1,2,3,7,8-> x=200 || 4-> x=2350->2900 ||  5-> x=30   ||  6-> x=30->200
   incl = 0;
   folded = false;
   createKart();
