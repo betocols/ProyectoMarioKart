@@ -22,7 +22,7 @@ void kart::createBody(){
 void kart::createRightFrontWheel(){
   _entRightFrontWheel = _sceneManager->createEntity("_entRightFrontWheel","ruedaDetallada.mesh");
   _nodeRightFrontWheel = _sceneManager->createSceneNode("_nodeRightFrontWheel");
-  _nodeRightFrontWheel->translate(0.0,-0.5,18.0);
+  _nodeRightFrontWheel->translate(-6.0,2.0,12.0);
   _nodeRightFrontWheel->attachObject(_entRightFrontWheel);
 }
 
@@ -30,7 +30,7 @@ void kart::createRightFrontWheel(){
 void kart::createRightBackWheel(){
   _entRightBackWheel = _sceneManager->createEntity("_entRightBackWheel","ruedaDetallada.mesh");
   _nodeRightBackWheel = _sceneManager->createSceneNode("_nodeRightBackWheel");
-  _nodeRightBackWheel->translate(0.0,-0.5,-1.0);
+  _nodeRightBackWheel->translate(-6.0,2.0,-6.0);
   _nodeRightBackWheel->attachObject(_entRightBackWheel);
 }
 
@@ -38,7 +38,7 @@ void kart::createRightBackWheel(){
 void kart::createLeftFrontWheel(){
   _entLeftFrontWheel = _sceneManager->createEntity("_entLeftFrontWheel","ruedaDetallada.mesh");
   _nodeLeftFrontWheel = _sceneManager->createSceneNode("_nodeLeftFrontWheel");
-  _nodeLeftFrontWheel->translate(13.5,-0.5,18.0);
+  _nodeLeftFrontWheel->translate(8.0,2.0,12.0);
   _nodeLeftFrontWheel->attachObject(_entLeftFrontWheel);
   // _nodeLeftFrontWheel->rotate(Ogre::Vector10(0.0,0.0,1.0), Ogre::Radian(Ogre::Degree(180.0)));
 }
@@ -46,7 +46,7 @@ void kart::createLeftFrontWheel(){
 void kart::createLeftBackWheel(){
   _entLeftBackWheel = _sceneManager->createEntity("_entLeftBackWheel","ruedaDetallada.mesh");
   _nodeLeftBackWheel = _sceneManager->createSceneNode("_nodeLeftBackWheel");
-  _nodeLeftBackWheel->translate(13.5,-0.5,-1.0);
+  _nodeLeftBackWheel->translate(8.0,2.0,-6.0);
   _nodeLeftBackWheel->attachObject(_entLeftBackWheel);
   // _nodeLeftBackWheel->rotate(Ogre::Vector10(0.0,0.0,1.0), Ogre::Radian(Ogre::Degree(180.0)));
 }
@@ -424,6 +424,7 @@ void kart::createKart(){
   car->addChild(_nodeLeftBackWheel);
   car->addChild(_nodeRightFrontWheel);
   car->addChild(_nodeRightBackWheel);
+  car->translate(0.0,0.0,-10.0);
 }
 
 
@@ -445,68 +446,42 @@ void kart::unfoldWings(){
 }
 
 void kart::moveRight(){
-  if (pos > -125.0){
-    // if (incl == -1){
-    //   incl = 0;
-    //   _nodeLeftFrontWheel->rotate(Ogre::Vector3(0.0,1.0,0.0), Ogre::Radian(Ogre::Degree(-90.0)));
-    //   _nodeRightFrontWheel->rotate(Ogre::Vector3(0.0,1.0,0.0), Ogre::Radian(Ogre::Degree(-90.0)));
-    // }
-
-    // if (incl == 0){
-    //   incl = 1;
-    //   _nodeLeftFrontWheel->rotate(Ogre::Vector3(0.0,1.0,0.0), Ogre::Radian(Ogre::Degree(-45.0)));
-    //   _nodeRightFrontWheel->rotate(Ogre::Vector3(0.0,1.0,0.0), Ogre::Radian(Ogre::Degree(-45.0)));
-    // }
-    
-    // _nodeLeftFrontWheel->rotate(Ogre::Vector3(0.0,1.0,0.0), Ogre::Radian(Ogre::Degree(45.0)));
-    // _nodeRightFrontWheel->rotate(Ogre::Vector3(0.0,1.0,0.0), Ogre::Radian(Ogre::Degree(45.0)));
-    
-    //Rota en direccion al movimiento
-    _nodeLeftFrontWheel->yaw(Ogre::Radian(Ogre::Degree(-45.0)));
-    _nodeRightFrontWheel->yaw(Ogre::Radian(Ogre::Degree(-45.0)));
-
-    //_nodeLeftFrontWheel->yaw(Ogre::Radian(Ogre::Degree(45.0)));
-    //_nodeRightFrontWheel->yaw(Ogre::Radian(Ogre::Degree(45.0)));
-
+  if (pos > -120.0){
     //Rota sobre su eje
-    // _nodeLeftFrontWheel->pitch(Ogre::Radian(Ogre::Degree(15.0)));
-    // _nodeRightFrontWheel->pitch(Ogre::Radian(Ogre::Degree(15.0)));
-    // _nodeLeftBackWheel->pitch(Ogre::Radian(Ogre::Degree(15.0)));
-    // _nodeRightBackWheel->pitch(Ogre::Radian(Ogre::Degree(15.0)));
+    _nodeLeftFrontWheel->pitch(Ogre::Radian(Ogre::Degree(-15.0)));
+    _nodeRightFrontWheel->pitch(Ogre::Radian(Ogre::Degree(-15.0)));
+    _nodeLeftBackWheel->pitch(Ogre::Radian(Ogre::Degree(-15.0)));
+    _nodeRightBackWheel->pitch(Ogre::Radian(Ogre::Degree(-15.0)));
     
-    // car->translate(-5.0,0.0,0.0);
+    
+    if (incl < 1){
+      incl++;
+      _nodeLeftFrontWheel->yaw(Ogre::Radian(Ogre::Degree(-45.0)));
+      _nodeRightFrontWheel->yaw(Ogre::Radian(Ogre::Degree(-45.0)));
+      
+    }
+
+    car->translate(-5.0,0.0,0.0);
     pos-=5.0;
   }
   
 }
 
 void kart::moveLeft(){
-  if (pos < 125.0){
-    // if (incl == 1){
-    //   incl = 0;
-    //   _nodeLeftFrontWheel->rotate(Ogre::Vector3(0.0,1.0,0.0), Ogre::Radian(Ogre::Degree(90.0)));
-    //   _nodeRightFrontWheel->rotate(Ogre::Vector3(0.0,1.0,0.0), Ogre::Radian(Ogre::Degree(90.0)));
-    // }
-
-    // if (incl == 0){
-    //   incl = -1;
-    //   _nodeLeftFrontWheel->rotate(Ogre::Vector3(0.0,1.0,0.0), Ogre::Radian(Ogre::Degree(45.0)));
-    //   _nodeRightFrontWheel->rotate(Ogre::Vector3(0.0,1.0,0.0), Ogre::Radian(Ogre::Degree(45.0)));
-    // }
-    //Rota en direccion al movimiento
-    _nodeLeftFrontWheel->yaw(Ogre::Radian(Ogre::Degree(45.0)));
-    _nodeRightFrontWheel->yaw(Ogre::Radian(Ogre::Degree(45.0)));
-
-    //_nodeLeftFrontWheel->yaw(Ogre::Radian(Ogre::Degree(-45.0)));
-    //_nodeRightFrontWheel->yaw(Ogre::Radian(Ogre::Degree(-45.0)));
-
+  if (pos < 120.0){
     //Rota sobre su eje
-    // _nodeLeftFrontWheel->pitch(Ogre::Radian(Ogre::Degree(15.0)));
-    // _nodeRightFrontWheel->pitch(Ogre::Radian(Ogre::Degree(15.0)));
-    // _nodeLeftBackWheel->pitch(Ogre::Radian(Ogre::Degree(15.0)));
-    // _nodeRightBackWheel->pitch(Ogre::Radian(Ogre::Degree(15.0)));
+    _nodeLeftFrontWheel->pitch(Ogre::Radian(Ogre::Degree(-15.0)));
+    _nodeRightFrontWheel->pitch(Ogre::Radian(Ogre::Degree(-15.0)));
+    _nodeLeftBackWheel->pitch(Ogre::Radian(Ogre::Degree(-15.0)));
+    _nodeRightBackWheel->pitch(Ogre::Radian(Ogre::Degree(-15.0)));
 
-    // car->translate(5.0,0.0,0.0);
+    if (incl > -1){
+      incl--;
+      _nodeLeftFrontWheel->yaw(Ogre::Radian(Ogre::Degree(45.0)));
+      _nodeRightFrontWheel->yaw(Ogre::Radian(Ogre::Degree(45.0)));
+    }
+
+    car->translate(5.0,0.0,0.0);
     pos+=5.0;
   }
   

@@ -1,6 +1,7 @@
 #include "Ogre\Ogre.h"
 #include "OIS\OIS.h"
 #include "kart.h"
+//#include "box.h"
 
 kart* carting;
 
@@ -194,7 +195,7 @@ class cAplicacion {
       // funcion donde se coloca lo que se desea desplegar.
       void createScene(){
                 
-
+		//_sceneManager->setSkyDome(true, "Examples/SpaceSkyPlane",5,8);
         _sceneManager->setAmbientLight(Ogre::ColourValue(0.2,0.2,0.2));
         _sceneManager->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
         
